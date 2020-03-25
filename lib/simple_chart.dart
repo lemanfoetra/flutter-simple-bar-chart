@@ -1,21 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as chart;
 
+import './ordinalsales.dart';
+
 class SimpleBarChart extends StatelessWidget {
+
   final List<chart.Series> seriesList;
   final bool animate;
+  final List<OrdinalSales> data;
 
-  SimpleBarChart(this.seriesList, {this.animate});
+  SimpleBarChart(this.seriesList,  {this.animate, this.data});
 
-  static List<chart.Series<OrdinalSales, String>> _createSampleData() {
-    final data = [
-      new OrdinalSales('2014', 5),
-      new OrdinalSales('2015', 7),
-      new OrdinalSales('2016', 3),
-      new OrdinalSales('2017', 7),
-      new OrdinalSales('2018', 8),
-      new OrdinalSales('2019', 5),
-    ];
+
+
+  static List<chart.Series<OrdinalSales, String>> _createSampleData(List<OrdinalSales> data) {
 
     return [
       chart.Series<OrdinalSales, String>(
@@ -28,9 +26,9 @@ class SimpleBarChart extends StatelessWidget {
     ];
   }
 
-  factory SimpleBarChart.withSampleData() {
-    return new SimpleBarChart(
-      _createSampleData(),
+  factory SimpleBarChart.createData(List<OrdinalSales> data){
+    return SimpleBarChart(
+      _createSampleData(data),
       animate: true,
     );
   }
@@ -42,11 +40,4 @@ class SimpleBarChart extends StatelessWidget {
       animate: animate,
     );
   }
-}
-
-class OrdinalSales {
-  final String year;
-  final int sales;
-
-  OrdinalSales(this.year, this.sales);
 }
